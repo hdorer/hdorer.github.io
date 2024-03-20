@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>About Me | hdorer</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta property="og:type" content="website">
+    <meta name="robots" content="index,follow">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <script type="module" src="https://md-block.verou.me/md-block.js"></script>
+  </head>
+  <body>
+    <div class="topnav" id="page-top-nav">
+      <a href="index.html">About Me</a>
+      <a href="" class="active">Resume</a>
+      <a href="">Projects</a>
+      <a href="javascript:void(0)" class="icon" onClick="setNavState()">
+        <i class="fa fa-bars"></i>
+      </a>
+    </div>
+    <md-block src="./Website Content/Resume.md"></md-block>
+    <script>
+      function setNavState() {
+        var elem = document.getElementById("page-top-nav");
+        if(!elem) {
+          console.log("Element not found!");
+          return;
+        }
+        console.log("Element found!");
+        if(elem.className === "topnav") {
+          elem.className += " responsive";
+        } else {
+          elem.className = "topnav";
+        }
+      }
+    </script>
+  </body>
+</html>
