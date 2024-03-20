@@ -2,41 +2,38 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Home | hdorer</title>
-    <meta name="generator" content="GrapesJS Studio">
+    <title>About Me | hdorer</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta property="og:type" content="website">
     <meta name="robots" content="index,follow">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="./css/style.css">
     <script type="module" src="https://md-block.verou.me/md-block.js"></script>
   </head>
-  <body id="izh7rg">
-    <div class="navbar" id="i8h96y">
-      <div data-gjs="navbar" class="navbar-container" id="izgekm">
-        <div id="ig11v8" class="navbar-burger">
-          <div class="navbar-burger-line">
-
-          </div>
-          <div class="navbar-burger-line">
-
-          </div>
-          <div class="navbar-burger-line">
-
-          </div>
-        </div>
-        <div data-gjs="navbar-items" class="navbar-items-c">
-          <nav class="navbar-menu">
-            <a id="i0kdow" href="" class="navbar-menu-link">Home</a>
-            <a class="navbar-menu-link" id="iuw3aa">About</a>
-            <a class="navbar-menu-link">Contact</a>
-          </nav>
-        </div>
-      </div>
+  <body>
+    <div class="topnav" id="page-top-nav">
+      <a href="" class="active">About Me</a>
+      <a href="resume.html">Resume</a>
+      <a href="">Projects</a>
+      <a href="javascript:void(0)" class="icon" onClick="setNavState()">
+        <i class="fa fa-bars"></i>
+      </a>
     </div>
-    <div class="gjs-grid-row" id="ib7jl">
-      <div class="gjs-grid-column" id="iii6l">
-        <md-block class="about-me-block" src="Website Content/About Me.md"></md-block>
-      </div>
-    </div>
+    <md-block src="./Website Content/About Me.md"></md-block>
+    <script>
+      function setNavState() {
+        var elem = document.getElementById("page-top-nav");
+        if(!elem) {
+          console.log("Element not found!");
+          return;
+        }
+        console.log("Element found!");
+        if(elem.className === "topnav") {
+          elem.className += " responsive";
+        } else {
+          elem.className = "topnav";
+        }
+      }
+    </script>
   </body>
 </html>
