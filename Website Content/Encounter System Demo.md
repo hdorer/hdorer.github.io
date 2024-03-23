@@ -3,6 +3,7 @@ In this post I will demonstrate the enemy encounter management system I created 
 
 This video is a demo showing all the functionality this system provides.  First, the player walks into the encounter space and the doors close.  Then, multiple distinct waves of enemies spawn from three spawners placed in the area.  Once all waves are cleared, the doors open again.
 <iframe src="https://drive.google.com/file/d/1ZvndhDdreDsatv3HbPTyHfFCPWWF3Z8V/preview" width="640" height="480" allow="autoplay"></iframe>
+
 This system uses the following Blueprint classes:
 
 ## BP_EncounterArea
