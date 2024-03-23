@@ -11,14 +11,29 @@
     <script type="module" src="https://md-block.verou.me/md-block.js"></script>
   </head>
   <body>
-    <div class="topnav" id="page-top-nav">
-      <a href="" class="active">About Me</a>
-      <a href="resume.html">Resume</a>
-      <a href="javascript:void(0)" class="icon" onClick="setNavState()">
-        <i class="fa fa-bars"></i>
-      </a>
-    </div>
+    <header>
+      <div class="topnav" id="page-top-nav">
+        <a href="" class="active">About Me</a>
+        <a href="resume.html">Resume</a>
+        <a href="javascript:void(0)" class="icon" onClick="setNavState()">
+          <i class="fa fa-bars"></i>
+        </a>
+      </div>
+    </header>
     <md-block src="./Website Content/About Me.md"></md-block>
+    <footer>
+      <div class="footer-container">
+        <a href="https://github.com/hdorer" class="footer-link">
+          <img src="res/github-logo.png" alt="Follow my GitHub">
+        </a>
+        <a href="https://www.linkedin.com/in/harrydorer/" class="footer-link">
+          <img src="res/linkedin-logo.png" alt="Connect with me on LinkedIn">
+        </a>
+        <a href="mailto:henry.dorer@mymail.champlain.edu" class="footer-link">
+          <img src="res/email-icon.png" alt="Email me">
+        </a>
+      </div>
+    </footer>
     <script>
       function setNavState() {
         var elem = document.getElementById("page-top-nav");
