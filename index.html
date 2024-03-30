@@ -21,7 +21,11 @@
         </a>
       </div>
     </header>
-    <md-block src="./Website Content/About Me.md"></md-block>
+    <div class="content-container">
+      <div class="content-block">
+        <md-block src="./Website Content/About Me.md"></md-block>
+      </div>
+    </div> 
     <footer>
       <div class="footer-container">
         <a href="https://github.com/hdorer" class="footer-link">
@@ -49,6 +53,26 @@
           elem.className = "topnav";
         }
       }
+
+      function setContainerHeight() {
+        const headerHeight = document.querySelector('header').offsetHeight;
+        const footerHeight = document.querySelector('footer').offsetHeight;
+        const container = document.querySelector('.content-container');
+
+        // Calculate remaining height for non-mobile screens
+        let remainingHeight = `calc(100vh - ${headerHeight}px - ${footerHeight}px)`;
+
+        // Additional logic for mobile screens (optional)
+        if (window.innerWidth <= 768) {
+          // Adjust media query width in CSS if needed
+          remainingHeight = 'auto'; // Allow content to define height on mobile
+        }
+
+        container.style.minHeight = remainingHeight;
+      }
+
+      window.addEventListener('load', setContainerHeight);
+      window.addEventListener('resize', setContainerHeight);
     </script>
   </body>
 </html>
