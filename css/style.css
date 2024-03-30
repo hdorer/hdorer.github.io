@@ -1,6 +1,6 @@
 body{
 	background-color: #859e9a;
-	margin: 0%;
+	margin: 0;
 }
 .topnav {
 	background-color: #225461;
@@ -60,9 +60,9 @@ body{
 	padding: 2% 4% 4% 4%;
 	/* margin: 1% 10%; */
 }
-@media screen and (max-width: 760px) {
-	.content{
-		min-height: calc(100vh - (header height + footer height))
+@media screen and (max-width: 600px) {
+	.content-container{
+		padding: 0%
 	}
 }
 .page_title {
