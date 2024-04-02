@@ -28,14 +28,14 @@ body{
 .topnav .icon{
 	display: none;
 }
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 767px) {
 	.topnav a:not(:first-child) {display: none;}
 	.topnav a.icon {
 		float: right;
 		display: block;
 	}
 }
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 767px) {
 	.topnav.responsive {position: relative;}
 	.topnav.responsive .icon {
 		position: absolute;
@@ -69,11 +69,6 @@ body{
 .content-image {
 	max-width: 600px;
 	height: auto;
-}
-@media screen and (max-width: 600px) {
-	.content-container{
-		padding: 0%;
-	}
 }
 @media screen and (min-width: 768px) {
 	.content-block {
