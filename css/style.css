@@ -49,7 +49,7 @@ body{
 	}
 }
 .page-container{
-	padding: 2% 10% 0 10%; /* Top, right, bottom, left padding */
+	padding: 2% 10% 0% 10%; /* Top, right, bottom, left padding */
 }
 .page-title {
     font-size: 48px;
@@ -69,6 +69,7 @@ body{
 @media screen and (max-width: 767px) {
 	.page-container {
 		padding: 0%;
+		margin: 50px;
 	}
 	.content-container {
 		padding: 1% 5% 5% 5%;
