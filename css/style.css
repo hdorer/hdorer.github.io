@@ -105,9 +105,6 @@ body{
 		flex: 1;
 		font-size: 120%;
 	}
-	.content-text iframe {
-		height: auto;
-	}
 }
 footer{
 	position: fixed;
