@@ -1,8 +1,4 @@
-Hi! I'm Harry Dorer.  Welcome to my website!
-
-I'm a senior at Champlain College pursuing a Game Programming degree and graduating in 2024.  I like making flexible, easy-to-use gameplay systems that power excitement for players.  I also like teaching myself new skills and technologies.  Most of my work experience so far has been on class projects, including interdisciplinary game production classes which honed my teamwork and communication skills.  I also have a few game jam projects.
-
-You can find examples of my past work in the "Portfolio" tab.  Recruiters may be interested in the "Resume" tab.  If you'd like to get in touch, you can find my GitHub, LinkedIn, and email linked below.
+I am a senior Game Programming major at Champlain College, graduating in 2024.  I am skilled at creating engaging gameplay systems, an eager learner, and built my experience with collaborative projects and game jams.
 
 # Currently Working On
 [![](res/sync-capsule.png)](https://store.steampowered.com/app/2820790/SYNC/)
