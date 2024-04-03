@@ -1,4 +1,3 @@
-# Encounter System Demo and Explanation
 In this post I will demonstrate the enemy encounter management system I created for my capstone game, SYNC.  This demo will show the system as it was at the end of last semester.
 
 This video is a demo showing all the functionality this system provides.  First, the player walks into the encounter space and the doors close.  Then, multiple distinct waves of enemies spawn from three spawners placed in the area.  Once all waves are cleared, the doors open again.

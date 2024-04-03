@@ -60,11 +60,7 @@ body{
 }
 .content-block {
 	display: flex;
-	flex-direction: column;
-	/* margin: 1% 10%; */
-}
-.content-text {
-	font-size: 20px;
+	flex-direction: column-reverse;
 }
 .content-image {
 	max-width: 600px;
@@ -81,7 +77,16 @@ body{
 		font-size: 36px;
 	}
 	.content-text {
-		font-size: 16px;
+		flex: 1;
+		font-size: 100%;
+	}
+	.content-text img {
+		max-width: 300px;
+		height: auto;
+	}
+	.content-text iframe {
+		max-width: 300px;
+		height: auto;
 	}
 	.content-image-container {
 		text-align: center;
@@ -98,6 +103,10 @@ body{
 	}
 	.content-text {
 		flex: 1;
+		font-size: 120%;
+	}
+	.content-text iframe {
+		height: auto;
 	}
 }
 footer{
