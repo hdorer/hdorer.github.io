@@ -1,3 +1,4 @@
+/* Entire page */
 @font-face {
 	font-family: RobotoLight;
 	src: url("../res/Roboto/Roboto-Light.ttf") format("supertype");
@@ -6,6 +7,8 @@ body{
 	background-color: #859e9a;
 	margin: 0;
 }
+
+/* Nav bar */
 .topnav {
 	background-color: #225461;
 	overflow: hidden;
@@ -52,6 +55,8 @@ body{
 		text-align: center;
 	}
 }
+
+/* Page content */
 .page-container{
 	padding: 2% 10% 0% 10%; /* Top, right, bottom, left padding */
 }
@@ -119,6 +124,8 @@ body{
 		font-style: normal;
 	}
 }
+
+/* Footer */
 footer{
 	position: fixed;
 	left: 0;

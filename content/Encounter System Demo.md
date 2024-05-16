@@ -1,17 +1,11 @@
-In this post I will demonstrate the enemy encounter management system I created for my capstone game, SYNC.  This demo will show the system as it was at the end of last semester.
+# Portfolio Reel
+<iframe width="560" height="315" src="https://www.youtube.com/embed/gpjXHFgNoHk?si=CgkM1-BCLZ0tpkCu" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-This video is a demo showing all the functionality this system provides.  First, the player walks into the encounter space and the doors close.  Then, multiple distinct waves of enemies spawn from three spawners placed in the area.  Once all waves are cleared, the doors open again.
-<iframe src="https://drive.google.com/file/d/1ZvndhDdreDsatv3HbPTyHfFCPWWF3Z8V/preview" width="640" height="480" allow="autoplay"></iframe>
+\[snappy intro\]
 
-This system uses the following Blueprint classes:
+Halfway through the first semester, our level designer, Sam, had been working on greyboxing the level, and our AI programmer, Sam, had created early versions of the enemies.  The next logical step was to spawn and track the enemies within the levels.  After talking with Sam (the level designer), we came up with some basic goals for the encounter management system.  It needed to spawn multiple waves of enemies, from multiple locations, in a combat arena.  It then needed to track all the enemies in the arena, including pre-placed enemies, and halt the player's progression until they clear all the enemies.
 
-## BP_EncounterArea
+To implement this initial iteration, I started with a simple box trigger Actor which I called the EncounterArea.  This object would register and track placed and spawned enemies, count how many waves were left in the encounter, and close all the door objects it controlled until the encounter was cleared.  I also created a Spawner object and made it spawn a wave of enemies when the player entered the trigger, or cleared the previous wave.  These objects together satisfied the initial requirements: when the player walked into the EncounterArea trigger, the doors would close and a wave of enemies would begin spawning from the Spawners that had been placed around the area.  Once all the enemies in a wave were killed, the next wave would spawn.  Then, once the player had cleared enough waves, the doors would open again and the player could move on.
 
-Actor with a box trigger component, which must cover the encounter space.  Contains references to all doors, spawners, and enemies in the area.  Enemies placed within the area by the level designer are registered to the area when the level loads.  When the player enters the trigger, it toggles the state of all doors, and tells all spawners to begin spawning enemies.
+It was a decent start, but after working with it for a while, Sam felt aspects of it were too restrictive.  In its current state, Spawners would spawn the same number of the same type of enemy each wave.  He wanted individual waves to be more varied, so I reworked how spawners were configured.  I stored an array of enemy class references in a WaveData structure, and stored an array of WaveDatas in the Spawner class.  When it was time to spawn a wave, the Spawner would spawn each enemy type listen in the array, and then increment the current wave counter by one.  If the current wave was outside the bounds of the WaveData array, it stopped attempting to spawn a new wave when the previous wave was defeated.  The encounter was then cleared once all the Spawners in a given EncounterArea ran out of waves to spawn.  This meant that an EncounterArea could have a set of spawners with wildly different wave configurations and even numbers of waves and still function just the same, and it enabled Sam to make engagements much more engaging.
 
-## BP_EnemySpawner
-
-Stores a list of waves which the spawner will spawn during the encounter.  Waves are represented by a struct which contains a list of enemies to spawn (by class reference), and a delay between enemy spawns (in seconds, as a float).
-
-The following is a video of the setup process for the encounter system:
-<iframe src="https://drive.google.com/file/d/1vf4O0AdzLMBIJlkuMMAaCjuyXQvX7zXa/preview" width="640" height="480" allow="autoplay"></iframe>
