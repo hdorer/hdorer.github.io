@@ -10,16 +10,16 @@ function Footer() {
         <footer>
             <div className="footer-container">
                 <a href="https://github.con/hdorer" className="footer-link">
-                    <img src={githubIcon} alt="Look at my repositories on GitHub"></img>
+                    <img src={githubIcon} alt="Look at my repositories on GitHub" />
                 </a>
                 <a href="https://hdorer.itch.io/" className="footer-link">
-                    <img src={itchioIcon} alt="Play my games on itch.io"></img>
+                    <img src={itchioIcon} alt="Play my games on itch.io" />
                 </a>
                 <a href="https://www.linkedin.com/in/harrydorer" className="footer-link">
-                    <img src={linkedinIcon} alt="Connect with me on LinkedIn"></img>
+                    <img src={linkedinIcon} alt="Connect with me on LinkedIn" />
                 </a>
                 <a href="mailto:hdorer24@gmail.com" className="footer-link">
-                    <img src={emailIcon} alt="Email me"></img>
+                    <img src={emailIcon} alt="Email me" />
                 </a>
             </div>
         </footer>
