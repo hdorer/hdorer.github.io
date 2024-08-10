@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 import NavbarLinks from './NavbarLinks';
 import hamburgerIcon from '../assets/hamburger-icon.png';
 import closeIcon from '../assets/close-icon.png';
