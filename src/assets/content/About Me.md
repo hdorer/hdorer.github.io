@@ -2,7 +2,7 @@ I am a senior Game Programming major at Champlain College, graduating in 2024. I
 
 # Latest Project
 
-[![](src/assets/sync-capsule.png)](https://store.steampowered.com/app/2820790/SYNC/)
+[![image](src/assets/sync-capsule.png)](https://store.steampowered.com/app/2820790/SYNC/)
 
 During my senior year, I worked on a large team to develop SYNC, a first-person shooter with fast-paced gameplay that makes you think on your feet. You play as an AI construct on a mission to stop the rogue AI SynTell from taking over the facility built by your creators, Unillect. Using your SYNC ability, you can take over the systems of any enemy in your path, using their advanced firepower to your advantage. SYNC [available now on Steam](https://store.steampowered.com/app/2820790/SYNC/)!
 
