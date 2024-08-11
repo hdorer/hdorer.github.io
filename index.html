@@ -1,89 +1,14 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <title>About Me | hdorer</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta property="og:type" content="website">
-    <meta name="robots" content="index,follow">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/style.css">
-    <script type="module" src="https://md-block.verou.me/md-block.js"></script>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/hdorer.github.io/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>hdorer.github.io</title>
+    <script type="module" crossorigin src="/hdorer.github.io/assets/index-kSvNA_nG.js"></script>
+    <link rel="stylesheet" crossorigin href="/hdorer.github.io/assets/index-CtHGHtL1.css">
   </head>
   <body>
-    <header>
-      <div class="topnav" id="page-top-nav">
-        <a href="" class="active">About Me</a>
-        <a href="portfolio.html">Portfolio</a>
-        <a href="javascript:void(0)" class="icon" onClick="setNavState()">
-          <i class="fa fa-bars"></i>
-        </a>
-      </div>
-    </header>
-    <div class="page-container">
-      <div class="content-container">
-        <h1 class="page-title">Hi!  I'm Harry Dorer.</h1>
-        <div class="content-block">
-          <md-block class="content-text" src="./content/About Me.md"></md-block>
-          <div class="content-image-container">
-            <img class="content-image" src="./res/portrait.jpg" alt="A picture of me looking very professional." title="A picture of me looking very professional.">
-          </div>
-        </div>
-      </div> 
-    </div>
-    <footer>
-      <div class="footer-container">
-        <a href="https://github.com/hdorer" class="footer-link">
-          <img src="res/github-logo.png" alt="Follow my GitHub">
-        </a>
-        <a href="https://hdorer.itch.io/" class="footer-link">
-          <img src="res/itch-io-icon.png" alt="Play my games on itch.io">
-        </a>
-        <a href="https://www.linkedin.com/in/harrydorer/" class="footer-link">
-          <img src="res/linkedin-logo.png" alt="Connect with me on LinkedIn">
-        </a>
-        <a href="mailto:hdorer24@gmail.com" class="footer-link">
-          <img src="res/email-icon.png" alt="Email me">
-        </a>
-      </div>
-    </footer>
-    <script>
-      function setNavState() {
-        var elem = document.getElementById("page-top-nav");
-        if(!elem) {
-          console.log("Element not found!");
-          return;
-        }
-        console.log("Element found!");
-        if(elem.className === "topnav") {
-          elem.className += " responsive";
-        } else {
-          elem.className = "topnav";
-        }
-      }
-
-      function setContainerHeight() {
-        const headerHeight = document.querySelector('header').offsetHeight;
-        const footerHeight = document.querySelector('footer').offsetHeight;
-        const container = document.querySelector('.content-container');
-
-        // Calculate remaining height for non-mobile screens
-        let remainingHeight = `calc(100vh - ${headerHeight}px - ${footerHeight}px)`;
-
-        // Additional logic for mobile screens (optional)
-        if (window.innerWidth <= 768) {
-          // Adjust media query width in CSS if needed
-          remainingHeight = 'auto'; // Allow content to define height on mobile
-        }
-
-        container.style.minHeight = remainingHeight;
-      }
-
-      window.addEventListener('load', setContainerHeight);
-      window.addEventListener('resize', setContainerHeight);
-    </script>
+    <div id="root"></div>
   </body>
 </html>
