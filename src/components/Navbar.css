@@ -1,0 +1,28 @@
+/* Nav bar */
+.nav {
+	background-color: #225461;
+	overflow: hidden;
+	text-align: center;
+	margin: 0px;
+	padding-top: 0px;
+    font-family: "RobotoLight", sans-serif;
+    font-size: 17px;
+}
+
+.nav a {
+	display: inline-block;
+	color: #f2f2f2;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+}
+
+.nav a:hover {
+	background-color: #ddd;
+	color: black;
+}
+
+.nav a.active {
+	background-color: #6C84A2;
+	color: white;
+}
