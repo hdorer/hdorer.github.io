@@ -6,7 +6,7 @@ function AboutMe() {
     return (
         <div className="page-container">
             <div className="content-container">
-                <h1 className="page-itle">Hi!  I'm Harry Dorer.</h1>
+                <h1 className="page-title">Hi!  I'm Harry Dorer.</h1>
                 <div className="content-block">
                     <Markdown className="content-text">{aboutMeContent}</Markdown>
                 </div>
