@@ -27,12 +27,7 @@
     align-items: center;
 }
 
-.mobile-nav-links a:hover {
-	background-color: #ddd;
-	color: black;
-}
-
-.mobile-nav-links a.active {
+.mobile-nav-links.opened a.active {
 	background-color: #6C84A2;
 	color: white;
 }
