@@ -7,16 +7,14 @@ import './MobileNavbar.css';
 function MobileNavbar() {
     const [opened, setOpened] = useState(false);
 
-    const toggleOpened = () => setOpened(!opened);
-
     return (
         <header>
             <div className="mobile-nav">
                 <div className={ opened ? "mobile-nav-links opened" : "mobile-nav-links"}>
-                    <NavbarLinks />
+                    <NavbarLinks onClick={ () => setOpened(false) } />
                 </div>
                 <div className="mobile-nav-menu-icon">
-                    <a onClick={toggleOpened}>
+                    <a onClick={ () => setOpened(!opened) }>
                         <img src={opened ? closeIcon : hamburgerIcon} />
                     </a>
                 </div>
