@@ -11,8 +11,9 @@ function NavbarLinks({ onClick }: Props) {
 
     return (
         <>
+            {import.meta.env.DEV && <Link to="/test-page/" className={pathname==="/test-page/" ? "active" : ""} onClick={onClick}>Test Page</Link>}
             <Link to="/" className={pathname === "/" ? "active" : ""} onClick={onClick}>About Me</Link>
-            <Link to="projects/" className={pathname === "/projects/" ? "active" : ""} onClick={onClick}>Projects</Link>
+            <Link to="/projects/" className={pathname === "/projects/" ? "active" : ""} onClick={onClick}>Projects</Link>
         </>
     )
 }
