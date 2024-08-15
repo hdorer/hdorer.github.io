@@ -8,14 +8,14 @@ function Root() {
     const [width, setWidth] = useState(window.innerWidth);
 
     useEffect(() => {
-        const handleResize = () => {
+        const resized = () => {
             setWidth(window.innerWidth);
         };
 
-        window.addEventListener('resize', handleResize);
+        window.addEventListener('resize', resized);
 
         return () => {
-            window.removeEventListener('resize', handleResize);
+            window.removeEventListener('resize', resized);
         }
     }, []);
 
