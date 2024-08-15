@@ -39,9 +39,11 @@ function Card({ title, thumbnail, children }: Props) {
             <div ref={thumbnailDiv} className="card-thumbnail">
                 <img src={thumbnail} style={{ maxWidth: `${thumbnailDivDimensions.width}px`, maxHeight: `${thumbnailDivDimensions.height}px` }} />
             </div>
-            <div className="card-content">
-                <h1>{title}</h1>
-                <div className="card-body">
+            <div className="card-body">
+                <div className="card-title">
+                    {title}
+                </div>
+                <div className="card-text">
                     {children}
                 </div>
             </div>

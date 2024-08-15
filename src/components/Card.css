@@ -3,12 +3,13 @@
     border: 1px solid #ccc;
     border-radius: 8px;
     overflow: hidden;
-    min-height: 500px;
+    min-height: 300px;
     font-family: "RobotoLight", sans-serif;
 }
 
 .card-thumbnail {
     display: flex;
+    border-right: 1px solid #ccc;
     align-items: center;
     justify-content: center;
     background-color: #f0f0f0;
@@ -16,20 +17,23 @@
     min-height: 100%;
 }
 
-.card-content {
+.card-body {
     display: flex;
     flex-direction: column;
     flex: 2;
-    padding: 16px;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-start;
+    justify-content: flex-start;
 }
 
-.card-content h1 {
-    margin: 0;
-    font-size: 24px;
+.card-title {
+    min-width: 100%;
+    padding: 6px 24px 6px 24px;
+    font-weight: bold;
+    font-size: 36pt;
+    border-bottom: 1px solid #ccc;
 }
 
-.card-body {
-    margin-top: 16px;
+.card-text {
+    padding: 16px 24px 16px 24px;
+    font-size: 16pt
 }
