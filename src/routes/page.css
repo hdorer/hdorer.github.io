@@ -1,4 +1,8 @@
 /* Page content */
+body{
+	background-color: #859e9a;
+	margin: 0;
+}
 .page-container{
 	padding: 1% 10% 0% 10%; /* Top, right, bottom, left padding */
 }
