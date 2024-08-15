@@ -42,8 +42,15 @@ body{
 	.content-container {
 		padding: 1% 5% 5% 5%;
 	}
+	.page-title {
+		font-size: 28pt;
+	}
 	.content-block {
 		flex-direction: column-reverse;
+	}
+	.content-text {
+		font-size: 12pt;
+		line-height: 1.5;
 	}
 	.content-text img {
 		max-width: 300px;
