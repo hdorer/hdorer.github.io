@@ -7,7 +7,7 @@ body{
 	padding: 1% 10% 0% 10%; /* Top, right, bottom, left padding */
 }
 .page-title {
-    font-size: 48px;
+    font-size: 36pt;
 	font-family: "RobotoLight", sans-serif;
 	font-weight: 700;
 	font-style: normal;
@@ -18,28 +18,32 @@ body{
 }
 .content-block {
 	display: flex;
-	flex-direction: column-reverse;
+	flex-direction: row;
+	gap: 5%
+}
+.content-text {
+	font-size: 16pt;
+	flex: 1;
+	font-family: "RobotoLight", sans-serif;
+	font-weight: 400;
+	font-style: normal;
 }
 .content-image {
 	max-width: 600px;
 	height: auto;
 }
 @media screen and (max-width: 767px) {
+	body{
+		background-color:#fff;
+	}
 	.page-container {
 		padding: 0px 0px 50px 0px;
 	}
 	.content-container {
 		padding: 1% 5% 5% 5%;
 	}
-	.page-title {
-		font-size: 36px;
-	}
-	.content-text {
-		flex: 1;
-		font-size: 100%;
-		font-family: "RobotoLight", sans-serif;
-		font-weight: 400;
-		font-style: normal;
+	.content-block {
+		flex-direction: column-reverse;
 	}
 	.content-text img {
 		max-width: 300px;
@@ -55,18 +59,5 @@ body{
 	.content-image {
 		max-width: 300px;
 		height: auto;
-	}
-}
-@media screen and (min-width: 768px) {
-	.content-block {
-		flex-direction: row;
-		gap: 5%;
-	}
-	.content-text {
-		flex: 1;
-		font-size: 120%;
-		font-family: "Roboto", sans-serif;
-		font-weight: 400;
-		font-style: normal;
 	}
 }

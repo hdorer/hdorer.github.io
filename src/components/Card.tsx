@@ -23,7 +23,7 @@ function Card({ title, thumbnail, children }: Props) {
                 width: thumbnailDiv.current.offsetWidth,
                 height: thumbnailDiv.current.offsetHeight
             });
-        }
+        };
 
         updateDimensions();
 
