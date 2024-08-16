@@ -1,17 +1,21 @@
 import { ReactNode, useRef, useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import './Card.css';
 
 interface Props {
     title?: string;
     thumbnail?: string;
+    linkTo?: string;
     children?: ReactNode;
 }
 
-function Card({ title, thumbnail, children }: Props) {
+function Card({ title, thumbnail, linkTo, children }: Props) {
     const thumbnailDiv = useRef<HTMLDivElement>(null);
 
     const [thumbnailDivDimensions, recordThumbnailDivDimensions] = useState({ width: 0, height: 0 });
     const [screenWidth, recordScreenWidth] = useState(0);
+
+    const location = useLocation();
 
     const updateSizes = () => {
         console.log("updateSizes");
@@ -58,8 +62,10 @@ function Card({ title, thumbnail, children }: Props) {
             </div>
         </div>
     );
-
+    
     useEffect(() => {
+        console.log("useEffect()");
+
         updateSizes();
 
         window.addEventListener('resize', updateSizes);
@@ -67,9 +73,17 @@ function Card({ title, thumbnail, children }: Props) {
         return () => {
             window.removeEventListener('resize', updateSizes);
         };
-    }, []);
+    }, [location]);
 
-    return screenWidth >= 768 ? desktopLayout : mobileLayout;
+    if(linkTo) {
+        return (
+            <Link to={linkTo} style={{ textDecoration: 'none', color: 'inherit' }}>
+                {screenWidth >= 768 ? desktopLayout : mobileLayout}
+            </Link>
+        );
+    } else {
+        return screenWidth >= 768 ? desktopLayout : mobileLayout;
+    }
 }
 
 export default Card;
