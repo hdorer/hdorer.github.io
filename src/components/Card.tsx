@@ -11,33 +11,28 @@ function Card({ title, thumbnail, children }: Props) {
     const thumbnailDiv = useRef<HTMLDivElement>(null);
 
     const [thumbnailDivDimensions, recordThumbnailDivDimensions] = useState({ width: 0, height: 0 });
+    const [screenWidth, recordScreenWidth] = useState(0);
 
-    useEffect(() => {
-        const updateDimensions = () => {
-            if(!thumbnailDiv.current) {
-                console.error("thumbnailDiv.current was null in Card.imageLoaded()!");
-                return;
-            }
+    const updateSizes = () => {
+        console.log("updateSizes");
 
-            recordThumbnailDivDimensions({
-                width: thumbnailDiv.current.offsetWidth,
-                height: thumbnailDiv.current.offsetHeight
-            });
-        };
+        recordScreenWidth(window.innerWidth);
 
-        updateDimensions();
+        if(!thumbnailDiv.current) {
+            console.error("thumbnailDiv.current was null in Card.imageLoaded()!");
+            return;
+        }
 
-        window.addEventListener('resize', updateDimensions);
-
-        return () => {
-            window.removeEventListener('resize', updateDimensions);
-        };
-    }, []);
-
-    return (
+        recordThumbnailDivDimensions({
+            width: thumbnailDiv.current.offsetWidth,
+            height: thumbnailDiv.current.offsetHeight
+        });
+    };
+    
+    const desktopLayout = (
         <div className="card">
             <div ref={thumbnailDiv} className="card-thumbnail">
-                <img src={thumbnail} style={{ maxWidth: `${thumbnailDivDimensions.width}px`, maxHeight: `${thumbnailDivDimensions.height}px` }} />
+                <img src={thumbnail} style={{ maxWidth: `${thumbnailDivDimensions.width}px`, maxHeight: `${thumbnailDivDimensions.height}px` }} onLoad={updateSizes} />
             </div>
             <div className="card-body">
                 <div className="card-title">
@@ -49,6 +44,32 @@ function Card({ title, thumbnail, children }: Props) {
             </div>
         </div>
     );
+
+    const mobileLayout = (
+        <div className="card">
+            <div className="card-title">
+                {title}
+            </div>            
+            <div ref={thumbnailDiv} className="card-thumbnail">
+                <img src={thumbnail} onLoad={updateSizes} />
+            </div>
+            <div className="card-text">
+                {children}
+            </div>
+        </div>
+    );
+
+    useEffect(() => {
+        updateSizes();
+
+        window.addEventListener('resize', updateSizes);
+
+        return () => {
+            window.removeEventListener('resize', updateSizes);
+        };
+    }, []);
+
+    return screenWidth >= 768 ? desktopLayout : mobileLayout;
 }
 
 export default Card;
