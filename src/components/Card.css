@@ -19,8 +19,8 @@
 
 .card-body {
     display: flex;
+    width: 67%;
     flex-direction: column;
-    flex: 2;
     align-items: flex-start;
     justify-content: flex-start;
 }
@@ -35,5 +35,31 @@
 
 .card-text {
     padding: 16px 24px 16px 24px;
-    font-size: 16pt
+    font-size: 16pt;
+}
+
+@media screen and (max-width: 767px) {
+    .card {
+        flex-direction: column;
+        min-height: 600px;
+    }
+
+    .card-title {
+        font-size: 28pt;
+        width: 100%;
+    }
+
+    .card-thumbnail {
+        max-height: 240px;
+        width: 100%;
+    }
+    
+    .card-thumbnail img {
+        max-height: 240px;
+    }
+
+    .card-text {
+        font-size: 12pt;
+		line-height: 1.5;
+    }
 }

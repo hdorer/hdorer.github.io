@@ -4,7 +4,7 @@ import './Card.css';
 interface Props {
     title?: string;
     thumbnail?: string;
-    children: ReactNode;
+    children?: ReactNode;
 }
 
 function Card({ title, thumbnail, children }: Props) {
