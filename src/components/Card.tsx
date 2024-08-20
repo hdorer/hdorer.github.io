@@ -1,6 +1,5 @@
-import { ReactNode, useRef, useLayoutEffect, useState } from 'react';
-import { Link, } from 'react-router-dom';
-import HeightGetter from './HeightGetter';
+import { ReactNode, useRef, useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import './Card.css';
 
 interface Props {
@@ -8,73 +7,73 @@ interface Props {
     thumbnail?: string;
     linkTo?: string;
     children?: ReactNode;
-};
+}
 
 function Card({ title, thumbnail, linkTo, children }: Props) {
-    const bodyDiv = useRef<HTMLDivElement>(null);
+    const thumbnailDiv = useRef<HTMLDivElement>(null);
 
+    const [thumbnailDivDimensions, recordThumbnailDivDimensions] = useState({ width: 0, height: 0 });
     const [screenWidth, recordScreenWidth] = useState(0);
-    const [bodyDivHeight, recordBodyDivHeight] = useState(0);
+
+    const location = useLocation();
+
+    const updateSizes = () => {
+        console.log("updateSizes");
+
+        recordScreenWidth(window.innerWidth);
+
+        if(!thumbnailDiv.current) {
+            console.error("thumbnailDiv.current was null in Card.imageLoaded()!");
+            return;
+        }
+
+        recordThumbnailDivDimensions({
+            width: thumbnailDiv.current.offsetWidth,
+            height: thumbnailDiv.current.offsetHeight
+        });
+    };
     
     const desktopLayout = (
-        <>
-            <div className="card">
-                { thumbnail && (
-                    <div className="card-thumbnail">
-                        {/* <img src={thumbnail} style={{ maxHeight: `${bodyDivHeight}px` }} /> */}
-                        {/* <img src={thumbnail} /> */}
-                    </div>
-                )}
-                <HeightGetter setHeight={recordBodyDivHeight}>
-                    <div ref={bodyDiv} className={`card-body ${thumbnail ? 'partial-width' : 'full-width'}`}>
-                        { title && (
-                            <div className="card-title">
-                                {title}
-                            </div>
-                        )}
-                        <div className="card-text">
-                            {children}
-                        </div>
-                    </div>
-                </HeightGetter>
+        <div className="card">
+            <div ref={thumbnailDiv} className="card-thumbnail">
+                <img src={thumbnail} style={{ maxWidth: `${thumbnailDivDimensions.width}px`, maxHeight: `${thumbnailDivDimensions.height}px` }} onLoad={updateSizes} />
             </div>
-            <p>Height: {bodyDivHeight}</p>
-        </>
+            <div className="card-body">
+                <div className="card-title">
+                    {title}
+                </div>
+                <div className="card-text">
+                    {children}
+                </div>
+            </div>
+        </div>
     );
 
     const mobileLayout = (
         <div className="card">
-            { title && (
-                <div className="card-title">
-                    {title}
-                </div>
-            )}            
-            { thumbnail && (
-                <div className="card-thumbnail">
-                    <img src={thumbnail} />
-                </div>
-            )}
+            <div className="card-title">
+                {title}
+            </div>            
+            <div ref={thumbnailDiv} className="card-thumbnail">
+                <img src={thumbnail} onLoad={updateSizes} />
+            </div>
             <div className="card-text">
                 {children}
             </div>
         </div>
     );
+    
+    useEffect(() => {
+        console.log("useEffect()");
 
-    useLayoutEffect(() => {
-        const resized = () => {
-            recordScreenWidth(window.innerWidth);
-        }
+        updateSizes();
 
-        resized();
-
-        window.addEventListener('resize', resized);
+        window.addEventListener('resize', updateSizes);
 
         return () => {
-            window.removeEventListener('resize', resized);
+            window.removeEventListener('resize', updateSizes);
         };
-    });
-
-    console.log(`bodyDivHeight: ${bodyDivHeight}`);
+    }, [location]);
 
     if(linkTo) {
         return (
