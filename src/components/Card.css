@@ -17,16 +17,29 @@
     min-height: 100%;
 }
 
+.card-thumbnail img {
+    max-width: 100%;
+}
+
 .card-body {
     display: flex;
-    width: 67%;
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
+    box-sizing: border-box;
+}
+
+.card-body.partial-width {
+    width: 67%;
+}
+
+.card-body.full-width {
+    width: 100%;
 }
 
 .card-title {
     min-width: 100%;
+    max-width: 100%;
     padding: 6px 24px 6px 24px;
     font-weight: bold;
     font-size: 36pt;
@@ -36,6 +49,12 @@
 .card-text {
     padding: 16px 24px 16px 24px;
     font-size: 16pt;
+    min-width: 100%;
+    max-width: 100%;
+}
+
+.card-test p {
+    max-width: 100%;
 }
 
 @media screen and (max-width: 767px) {
