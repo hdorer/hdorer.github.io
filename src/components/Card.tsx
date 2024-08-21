@@ -1,5 +1,6 @@
 import { ReactNode, useRef, useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import HeightGetter from './HeightGetter';
 import './Card.css';
 
 interface Props {
@@ -12,35 +13,17 @@ interface Props {
 function Card({ title, thumbnail, linkTo, children }: Props) {
     const thumbnailDiv = useRef<HTMLDivElement>(null);
 
-    const [thumbnailDivDimensions, recordThumbnailDivDimensions] = useState({ width: 0, height: 0 });
     const [screenWidth, recordScreenWidth] = useState(0);
-
-    const location = useLocation();
-
-    const updateSizes = () => {
-        console.log("updateSizes");
-
-        recordScreenWidth(window.innerWidth);
-
-        if(!thumbnailDiv.current) {
-            console.error("thumbnailDiv.current was null in Card.imageLoaded()!");
-            return;
-        }
-
-        recordThumbnailDivDimensions({
-            width: thumbnailDiv.current.offsetWidth,
-            height: thumbnailDiv.current.offsetHeight
-        });
-    };
+    const [bodyDivHeight, recordBodyDivHeight] = useState(0);
     
     const desktopLayout = (
         <div className="card">
             { thumbnail && (
                 <div ref={thumbnailDiv} className="card-thumbnail">
-                    <img src={thumbnail} style={{ maxWidth: `${thumbnailDivDimensions.width}px`, maxHeight: `${thumbnailDivDimensions.height}px` }} onLoad={updateSizes} />
+                    <img src={thumbnail} style={{ maxHeight: `${bodyDivHeight}px` }} />
                 </div>
             )}
-            <div className={thumbnail ? "card-body" : "card-body no-thumbnail"}>
+            <HeightGetter className={thumbnail ? "card-body" : "card-body no-thumbnail"} setHeight={recordBodyDivHeight}>
                 { title && (
                     <div className="card-title">
                         {title}
@@ -49,7 +32,7 @@ function Card({ title, thumbnail, linkTo, children }: Props) {
                 <div className="card-text">
                     {children}
                 </div>
-            </div>
+            </HeightGetter>
         </div>
     );
 
@@ -62,7 +45,7 @@ function Card({ title, thumbnail, linkTo, children }: Props) {
             )}            
             { thumbnail && (
                 <div ref={thumbnailDiv} className="card-thumbnail">
-                    <img src={thumbnail} onLoad={updateSizes} />
+                    <img src={thumbnail} />
                 </div>
             )}
             <div className="card-text">
@@ -70,18 +53,20 @@ function Card({ title, thumbnail, linkTo, children }: Props) {
             </div>
         </div>
     );
-    
+
     useEffect(() => {
-        console.log("useEffect()");
-
-        updateSizes();
-
-        window.addEventListener('resize', updateSizes);
-
-        return () => {
-            window.removeEventListener('resize', updateSizes);
+        const resized = () => {
+            recordScreenWidth(window.innerWidth);
         };
-    }, [location]);
+
+        resized();
+
+        window.addEventListener('resize', resized);
+        
+        return () => {
+            window.addEventListener('resize', resized);
+        }
+    }, []);
 
     if(linkTo) {
         return (
