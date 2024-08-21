@@ -35,13 +35,17 @@ function Card({ title, thumbnail, linkTo, children }: Props) {
     
     const desktopLayout = (
         <div className="card">
-            <div ref={thumbnailDiv} className="card-thumbnail">
-                <img src={thumbnail} style={{ maxWidth: `${thumbnailDivDimensions.width}px`, maxHeight: `${thumbnailDivDimensions.height}px` }} onLoad={updateSizes} />
-            </div>
-            <div className="card-body">
-                <div className="card-title">
-                    {title}
+            { thumbnail && (
+                <div ref={thumbnailDiv} className="card-thumbnail">
+                    <img src={thumbnail} style={{ maxWidth: `${thumbnailDivDimensions.width}px`, maxHeight: `${thumbnailDivDimensions.height}px` }} onLoad={updateSizes} />
                 </div>
+            )}
+            <div className={thumbnail ? "card-body" : "card-body no-thumbnail"}>
+                { title && (
+                    <div className="card-title">
+                        {title}
+                    </div>
+                )}
                 <div className="card-text">
                     {children}
                 </div>
@@ -51,12 +55,16 @@ function Card({ title, thumbnail, linkTo, children }: Props) {
 
     const mobileLayout = (
         <div className="card">
-            <div className="card-title">
-                {title}
-            </div>            
-            <div ref={thumbnailDiv} className="card-thumbnail">
-                <img src={thumbnail} onLoad={updateSizes} />
-            </div>
+            { title && (
+                <div className="card-title">
+                    {title}
+                </div>
+            )}            
+            { thumbnail && (
+                <div ref={thumbnailDiv} className="card-thumbnail">
+                    <img src={thumbnail} onLoad={updateSizes} />
+                </div>
+            )}
             <div className="card-text">
                 {children}
             </div>

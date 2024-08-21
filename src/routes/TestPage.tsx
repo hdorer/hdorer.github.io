@@ -5,7 +5,7 @@ function TestPage() {
     return (
         <div className="page-container">
             <div className="content-container">
-                <Card title="Test Card" thumbnail={thumbnail} linkTo="/">
+                <Card title="Test Card" thumbnail={thumbnail}>
                     This is a card.
                 </Card>
             </div>

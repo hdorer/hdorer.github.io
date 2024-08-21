@@ -25,6 +25,10 @@
     justify-content: flex-start;
 }
 
+.card-body.no-thumbnail {
+    width: 100%;
+}
+
 .card-title {
     min-width: 100%;
     padding: 6px 24px 6px 24px;
