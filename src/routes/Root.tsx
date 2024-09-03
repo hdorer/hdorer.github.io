@@ -2,7 +2,9 @@ import { useState, useEffect } from 'react';
 import { Outlet } from "react-router-dom";
 import Navbar from '../components/Navbar';
 import MobileNavbar from '../components/MobileNavbar';
+import PageLayout from '../components/PageLayout';
 import Footer from "../components/Footer";
+import './page.css';
 
 function Root() {
     const [width, setWidth] = useState(window.innerWidth);
@@ -22,7 +24,9 @@ function Root() {
     return (
         <>
             {width >= 768 ? <Navbar /> : <MobileNavbar />}
-            <Outlet />
+            <PageLayout>
+                <Outlet />
+            </PageLayout>
             <Footer />
         </>
     );
