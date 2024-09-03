@@ -1,5 +1,5 @@
 import Card from '../components/Card';
-import thumbnail from '../assets/portrait.jpg';
+import thumbnail from '../assets/images/portrait.jpg';
 
 function TestPage() {
     return (

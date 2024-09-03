@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import Markdown from 'react-markdown';
-import projectsContent from '../assets/content/Encounter System Article.md?raw';
+import projectsContent from '../assets/articles/Encounter System Article.md?raw';
 import './page.css';
 
 function Projects() {

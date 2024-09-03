@@ -1,5 +1,5 @@
-import syncCapsuleImage from '../assets/sync-capsule.png';
-import portraitImage from '../assets/portrait.jpg';
+import syncCapsuleImage from '../assets/images/sync-capsule.png';
+import portraitImage from '../assets/images/portrait.jpg';
 import './page.css';
 
 function AboutMe() {    

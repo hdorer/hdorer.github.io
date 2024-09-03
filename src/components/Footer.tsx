@@ -1,7 +1,7 @@
-import githubIcon from '../assets/github-logo.png';
-import itchioIcon from '../assets/itch-io-icon.png';
-import linkedinIcon from '../assets/linkedin-logo.png';
-import emailIcon from '../assets/email-icon.png'
+import githubIcon from '../assets/images/github-logo.png';
+import itchioIcon from '../assets/images/itch-io-icon.png';
+import linkedinIcon from '../assets/images/linkedin-logo.png';
+import emailIcon from '../assets/images/email-icon.png'
 import './Footer.css';
 
 
