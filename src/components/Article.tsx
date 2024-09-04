@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import Markdown from 'react-markdown';
 import articles from '../modules/ArticleLoader';
 
-interface ArticleData {
+export interface ArticleData {
     filename: string
 }
 
@@ -10,7 +10,7 @@ interface Props {
     data: ArticleData;
 }
 
-function Article({ data }: Props) {
+export function Article({ data }: Props) {
     const [articleText, setArticleText] = useState('');
 
     useEffect(() => {
@@ -38,5 +38,3 @@ function Article({ data }: Props) {
         </div>
     );
 }
-
-export default Article;

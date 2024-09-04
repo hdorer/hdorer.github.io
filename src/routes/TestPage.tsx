@@ -1,7 +1,10 @@
-import Article from "../components/Article";
+import { Article, ArticleData } from '../components/Article';
+import encounterArticleJson from '../assets/articles/data/encounter_system.json';
+
+const encounterArticleData: ArticleData = encounterArticleJson;
 
 function TestPage() {
-    return <Article data={{ filename: "Encounter System Article.md" }} />;
+    return <Article data={encounterArticleData} />;
 }
 
 export default TestPage;
