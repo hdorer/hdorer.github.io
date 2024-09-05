@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import Markdown from 'react-markdown';
 import articles from '../modules/ArticleLoader';
+import portrait from '../assets/images/portrait.jpg';
+import './Article.css';
 
 export interface ArticleData {
     filename: string
@@ -33,8 +35,14 @@ export function Article({ data }: Props) {
     }, [data.filename, articles]);
 
     return (
-        <div className="text-column">
-            <Markdown>{articleText}</Markdown>
-        </div>
+        <article>
+            <div className="text-column">
+                <Markdown className="article-text">{articleText}</Markdown>
+            </div>
+            <div className="media-column">
+                <img src={portrait} />
+                <p>Image caption</p>
+            </div>
+        </article>
     );
 }

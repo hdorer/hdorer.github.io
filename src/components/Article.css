@@ -1,0 +1,28 @@
+article {
+    font-family: "RobotoLight", sans-serif;
+    display: flex;
+}
+
+.text-column {
+    width: 67%;
+    padding-right: 4%;
+}
+
+.article-text {
+    font-size: 16pt;
+}
+
+.media-column {
+    width: 33%;
+}
+
+.media-column img {
+    max-width: 100%;
+    height: auto;
+}
+
+.media-column p {
+    font-size: 12pt;
+    color: rgb(124, 124, 124);
+    font-style: italic;
+}
