@@ -13,29 +13,27 @@ interface Props {
 }
 
 export function Article({ data }: Props) {
-    const [articleParagraphs, setArticleParagraphs] = useState<string[]>();
-    const [success, setSuccess] = useState<boolean>();
+    const [paragraphStrings, setParagraphStrings] = useState<string[]>();
+    const [success, setSuccess] = useState<boolean>(true);
 
-    useEffect(() => {
-        const loadArticle = async (): Promise<string[]> => {
-            const importArticle = articles[`../assets/articles/${data.filename}`];
-            if(!importArticle) {
-                throw new Error(`Article ${data.filename} not found!`);
-            }
-            
-            const articleText = await importArticle();
-
-            return articleText.split('\n\n');
+    const loadArticle = async (): Promise<string[]> => {
+        const importArticle = articles[`../assets/articles/${data.filename}`];
+        if(!importArticle) {
+            throw new Error(`Article ${data.filename} not found!`);
         }
+        
+        const importedArticle = await importArticle();
 
-        loadArticle().then(paragraphs => {
-            setArticleParagraphs(paragraphs);
-            setSuccess(true);
-        }).catch(error => {
-            console.error(`Error loading article ${data.filename}: ` + error);
-            setSuccess(false);
-        });
-    }, []);
+        return importedArticle.split('\n\n');
+    }
+
+    loadArticle().then(paragraphs => {
+        setParagraphStrings(paragraphs);
+        setSuccess(true);
+    }).catch(error => {
+        console.error(`Error loading article ${data.filename}: ` + error);
+        setSuccess(false);
+    });
 
     if(!success) {
         return <p className="article-text">There was an error loading this article!</p>
@@ -44,7 +42,7 @@ export function Article({ data }: Props) {
     return (
         <article>
             <div className="text-column">
-                {articleParagraphs?.map((paragraph, index) => (
+                {paragraphStrings?.map((paragraph, index) => (
                     <Markdown key={index} className="article-text">{paragraph}</Markdown>
                 ))}
             </div>
