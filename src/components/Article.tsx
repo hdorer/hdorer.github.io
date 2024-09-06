@@ -13,35 +13,44 @@ interface Props {
 }
 
 export function Article({ data }: Props) {
-    const [articleText, setArticleText] = useState('');
+    const [articleParagraphs, setArticleParagraphs] = useState<string[]>();
+    const [success, setSuccess] = useState<boolean>();
 
     useEffect(() => {
-        const loadArticle = async () => {
-            try {
-                const importArticle = articles[`../assets/articles/${data.filename}`];
-                if(importArticle) {
-                    const articleText = await importArticle();
-                    setArticleText(articleText);
-                } else {
-                    setArticleText(`Error: Article ${data.filename} not found!`);
-                }
-            } catch(error) {
-                console.error(`Error loading article ${data.filename}: `, error);
-                setArticleText(`Error loading article ${data.filename}!`);
+        const loadArticle = async (): Promise<string[]> => {
+            const importArticle = articles[`../assets/articles/${data.filename}`];
+            if(!importArticle) {
+                throw new Error(`Article ${data.filename} not found!`);
             }
+            
+            const articleText = await importArticle();
+
+            return articleText.split('\n\n');
         }
 
-        loadArticle();
-    }, [data.filename, articles]);
+        loadArticle().then(paragraphs => {
+            setArticleParagraphs(paragraphs);
+            setSuccess(true);
+        }).catch(error => {
+            console.error(`Error loading article ${data.filename}: ` + error);
+            setSuccess(false);
+        });
+    }, []);
+
+    if(!success) {
+        return <p className="article-text">There was an error loading this article!</p>
+    }
 
     return (
         <article>
             <div className="text-column">
-                <Markdown className="article-text">{articleText}</Markdown>
+                {articleParagraphs?.map((paragraph, index) => (
+                    <Markdown key={index} className="article-text">{paragraph}</Markdown>
+                ))}
             </div>
             <div className="media-column">
                 <img src={portrait} />
-                <p>Image caption</p>
+                <p className="image-caption">Image caption</p>
             </div>
         </article>
     );

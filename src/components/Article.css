@@ -21,7 +21,7 @@ article {
     height: auto;
 }
 
-.media-column p {
+.media-column .image-caption {
     font-size: 12pt;
     color: rgb(124, 124, 124);
     font-style: italic;
