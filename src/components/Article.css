@@ -1,27 +1,34 @@
 article {
     font-family: "RobotoLight", sans-serif;
+}
+
+.paragraph {
     display: flex;
 }
 
-.text-column {
+.paragraph .text-column {
     width: 67%;
     padding-right: 4%;
 }
 
-.article-text {
+.paragraph .text-column.no-image {
+    width: 100%;
+}
+
+.paragraph .text-column .article-text {
     font-size: 16pt;
 }
 
-.media-column {
+.paragraph .media-column {
     width: 33%;
 }
 
-.media-column img {
+.paragraph .media-column img {
     max-width: 100%;
     height: auto;
 }
 
-.media-column .image-caption {
+.paragraph .media-column .image-caption {
     font-size: 12pt;
     color: rgb(124, 124, 124);
     font-style: italic;

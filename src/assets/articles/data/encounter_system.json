@@ -1,3 +1,10 @@
 {
-    "filename": "Encounter System Article.md"
+    "filename": "Encounter System Article.md",
+    "images": [
+        {
+            "src": "portrait.jpg",
+            "paragraph": 0,
+            "caption": "A picture of me looking very professional."
+        }
+    ]
 }
