@@ -1,6 +1,7 @@
-import { ReactNode, useRef, useEffect, useState } from 'react';
+import { ReactNode, useContext, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import HeightGetter from './HeightGetter';
+import globalContext from './GlobalContext';
 import './Card.css';
 
 interface Props {
@@ -11,9 +12,13 @@ interface Props {
 }
 
 function Card({ title, thumbnail, linkTo, children }: Props) {
+    const context = useContext(globalContext);
+    if(!context) {
+        throw new Error("Missing context (is the component you're trying to use this in inside a GlobalContextProvider?)");
+    }
+
     const thumbnailDiv = useRef<HTMLDivElement>(null);
 
-    const [screenWidth, recordScreenWidth] = useState(0);
     const [bodyDivHeight, recordBodyDivHeight] = useState(0);
     
     const desktopLayout = (
@@ -54,19 +59,7 @@ function Card({ title, thumbnail, linkTo, children }: Props) {
         </div>
     );
 
-    useEffect(() => {
-        const resized = () => {
-            recordScreenWidth(window.innerWidth);
-        };
-
-        resized();
-
-        window.addEventListener('resize', resized);
-        
-        return () => {
-            window.addEventListener('resize', resized);
-        }
-    }, []);
+    const { screenWidth } = context;
 
     if(linkTo) {
         return (
