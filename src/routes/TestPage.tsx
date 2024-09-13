@@ -1,10 +1,10 @@
 import { Article, ArticleData } from '../components/Article';
-import encounterArticleJson from '../assets/articles/data/encounter_system.json';
+import articleJson from '../assets/articles/data/encounter_system.json';
 
-const encounterArticleData: ArticleData = encounterArticleJson;
+const articleData: ArticleData = articleJson;
 
 function TestPage() {
-    return <Article data={encounterArticleData} />;
+    return <Article data={articleData} />;
 }
 
 export default TestPage;

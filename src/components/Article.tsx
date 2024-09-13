@@ -1,5 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useContext, useRef, useState, useEffect } from 'react';
 import Markdown from 'react-markdown';
+import HeightGetter from './HeightGetter';
+import globalContext from './GlobalContext';
 import articles from '../modules/ArticleLoader';
 import './Article.css';
 
@@ -25,15 +27,40 @@ interface Props {
 }
 
 function Paragraph({ text, imageSrc, imageCaption }: ParagraphProps) {
+    const context = useContext(globalContext);
+    if(!context) {
+        throw new Error("Missing context (is the component you're trying to use this in inside a GlobalContextProvider?)");
+    }
+
+    const textRef = useRef<HTMLDivElement>(null);
+    const captionRef = useRef<HTMLParagraphElement>(null);
+
+    const [textHeight, recordTextHeight] = useState(0);
+    const [captionHeight, recordCaptionHeight] = useState(0);
+
+    const { screenWidth } = context;
+
     return (
         <div className="paragraph">
-            <div className={imageSrc ? "text-column" : "text-column no-image"}>
-                <Markdown className="article-text">{text}</Markdown>
+            <HeightGetter elementRef={textRef} setHeight={recordTextHeight} />
+            <HeightGetter elementRef={captionRef} setHeight={recordCaptionHeight} />
+            <div className="text-column">
+                <div ref={textRef} className="text-wrapper">
+                    <Markdown className="article-text">{text}</Markdown>
+                </div>
             </div>
             {imageSrc && (
                 <div className="media-column">
-                    <img src={`/src/assets/images/${imageSrc}`} />
-                    {imageCaption && <p className="image-caption">{imageCaption}</p>}
+                    {screenWidth >= 768 ? 
+                        <img src={`/src/assets/images/${imageSrc}`} style={{
+                            maxHeight: `${textHeight - captionHeight}px`,
+                            width: `100%`,
+                            height: `auto`,
+                            objectFit: `contain`
+                        }} /> :
+                        <img src={`/src/assets/images/${imageSrc}`} />
+                    }
+                    {imageCaption && <p ref={captionRef} className="image-caption">{imageCaption}</p>}
                 </div>
             )}
         </div>
@@ -53,7 +80,7 @@ export function Article({ data }: Props) {
             
             const importedArticle = await importArticle();
     
-            return importedArticle.split('\n\n');
+            return importedArticle.replace(/\r\n/g, '\n').trim().split(/\n\s*\n/);
         }
     
         loadArticle().then(paragraphs => {

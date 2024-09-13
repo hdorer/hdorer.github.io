@@ -17,18 +17,19 @@ function Card({ title, thumbnail, linkTo, children }: Props) {
         throw new Error("Missing context (is the component you're trying to use this in inside a GlobalContextProvider?)");
     }
 
-    const thumbnailDiv = useRef<HTMLDivElement>(null);
+    const bodyDiv = useRef<HTMLDivElement>(null);
 
     const [bodyDivHeight, recordBodyDivHeight] = useState(0);
     
     const desktopLayout = (
         <div className="card">
+            <HeightGetter elementRef={bodyDiv} setHeight={recordBodyDivHeight} />
             { thumbnail && (
-                <div ref={thumbnailDiv} className="card-thumbnail">
+                <div className="card-thumbnail">
                     <img src={thumbnail} style={{ maxHeight: `${bodyDivHeight}px` }} />
                 </div>
             )}
-            <HeightGetter className={thumbnail ? "card-body" : "card-body no-thumbnail"} setHeight={recordBodyDivHeight}>
+            <div ref={bodyDiv} className={thumbnail ? "card-body" : "card-body no-thumbnail"}>
                 { title && (
                     <div className="card-title">
                         {title}
@@ -37,7 +38,7 @@ function Card({ title, thumbnail, linkTo, children }: Props) {
                 <div className="card-text">
                     {children}
                 </div>
-            </HeightGetter>
+            </div>
         </div>
     );
 
@@ -49,7 +50,7 @@ function Card({ title, thumbnail, linkTo, children }: Props) {
                 </div>
             )}            
             { thumbnail && (
-                <div ref={thumbnailDiv} className="card-thumbnail">
+                <div className="card-thumbnail">
                     <img src={thumbnail} />
                 </div>
             )}

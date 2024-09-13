@@ -1,31 +1,20 @@
-import { ReactNode, useRef, useEffect } from 'react';
+import { RefObject, useEffect } from 'react';
 
 interface Props {
-    className?: string
+    elementRef: RefObject<HTMLElement>;
     setHeight?: (height: number) => void;
-    children?: ReactNode
 }
 
-function HeightGetter({ className, setHeight, children }: Props) {
-    const divRef = useRef<HTMLDivElement>(null); 
-
+function HeightGetter({ elementRef, setHeight }: Props) {
     useEffect(() => {
-        if(!divRef.current) {
+        if(!elementRef.current || !setHeight) {
             return;
         }
         
-        if(!setHeight) {
-            return;
-        }
-        
-        setHeight(divRef.current.clientHeight);
+        setHeight(elementRef.current.offsetHeight);
     }, []);
     
-    return (
-        <div ref={divRef} className={className}>
-            {children}
-        </div>
-    );
+    return <></>;
 }
 
 export default HeightGetter;

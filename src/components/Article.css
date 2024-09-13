@@ -4,27 +4,38 @@ article {
 
 .paragraph {
     display: flex;
+    font-size: 16pt;
+    margin-top: 1em;
+    margin-bottom: 1em;
 }
 
 .paragraph .text-column {
     width: 67%;
-    padding-right: 4%;
 }
 
 .paragraph .text-column.no-image {
     width: 100%;
 }
 
-.paragraph .text-column .article-text {
-    font-size: 16pt;
+.paragraph .text-column .text-wrapper {
+    flex-grow: 0;
+    align-self: flex-start;
+    height: auto;
+}
+
+.paragraph .text-column .text-wrapper .article-text p {
+    margin: 0;
 }
 
 .paragraph .media-column {
     width: 33%;
+    display:flex; /* surely this will have no negative consequences */
+    flex-direction: column;
 }
 
 .paragraph .media-column img {
     max-width: 100%;
+    min-height: 240px;
     height: auto;
 }
 
@@ -32,4 +43,33 @@ article {
     font-size: 12pt;
     color: rgb(124, 124, 124);
     font-style: italic;
+    margin: 0;
+    padding-top: 1em;
+}
+
+@media screen and (min-width: 768px) {
+    .paragraph .text-column {
+        padding-right: 4%;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .paragraph {
+        flex-direction: column;
+    }
+
+    .paragraph .text-column {
+        width: 100%;
+    }
+
+    .paragraph .media-column {
+        width: 100%;
+    }
+
+    .paragraph .media-column img {
+        max-height: 240px;
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+    }
 }
