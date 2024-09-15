@@ -5,6 +5,15 @@
             "src": "portrait.jpg",
             "paragraph": 0,
             "caption": "A picture of me looking very professional."
+        },
+        {
+            "src": "sync-capsule.png",
+            "paragraph": 1,
+            "caption": "The capsule image for my senior year project, SYNC."
+        },
+        {
+            "src": "landscape.png",
+            "paragraph": 2
         }
     ]
 }

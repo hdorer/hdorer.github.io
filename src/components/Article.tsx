@@ -27,6 +27,8 @@ interface Props {
 }
 
 function Paragraph({ text, imageSrc, imageCaption }: ParagraphProps) {
+    const imageMinHeight = 240;
+
     const context = useContext(globalContext);
     if(!context) {
         throw new Error("Missing context (is the component you're trying to use this in inside a GlobalContextProvider?)");
@@ -51,15 +53,7 @@ function Paragraph({ text, imageSrc, imageCaption }: ParagraphProps) {
             </div>
             {imageSrc && (
                 <div className="media-column">
-                    {screenWidth >= 768 ? 
-                        <img src={`/src/assets/images/${imageSrc}`} style={{
-                            maxHeight: `${textHeight - captionHeight}px`,
-                            width: `100%`,
-                            height: `auto`,
-                            objectFit: `contain`
-                        }} /> :
-                        <img src={`/src/assets/images/${imageSrc}`} />
-                    }
+                    <img src={`/src/assets/images/${imageSrc}`} style={{ maxHeight: `${screenWidth >= 768 ? Math.max(textHeight - captionHeight, imageMinHeight) : imageMinHeight}px` }} />
                     {imageCaption && <p ref={captionRef} className="image-caption">{imageCaption}</p>}
                 </div>
             )}
