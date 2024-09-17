@@ -1,19 +1,21 @@
 {
     "filename": "Encounter System Article.md",
+    "title": "How Syntell keeps track of his Synths",
+    "date": "2024-09-16T00:00:00Z",
     "images": [
         {
             "src": "portrait.jpg",
-            "paragraph": 0,
+            "paragraph": 1,
             "caption": "A picture of me looking very professional."
         },
         {
             "src": "sync-capsule.png",
-            "paragraph": 1,
+            "paragraph": 2,
             "caption": "The capsule image for my senior year project, SYNC."
         },
         {
             "src": "landscape.png",
-            "paragraph": 2
+            "paragraph": 3
         }
     ]
 }

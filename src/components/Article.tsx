@@ -13,6 +13,8 @@ interface ArticleImage {
 
 export interface ArticleData {
     filename: string;
+    title: string
+    date: string;
     images: ArticleImage[];
 }
 
@@ -46,10 +48,8 @@ function Paragraph({ text, imageSrc, imageCaption }: ParagraphProps) {
         <div className="paragraph">
             <HeightGetter elementRef={textRef} setHeight={recordTextHeight} />
             <HeightGetter elementRef={captionRef} setHeight={recordCaptionHeight} />
-            <div className="text-column">
-                <div ref={textRef} className="text-wrapper">
-                    <Markdown className="article-text">{text}</Markdown>
-                </div>
+            <div className={`${imageCaption ? "text-column" : "text-column no-image"}`}>
+                <Markdown className="article-text">{text}</Markdown>
             </div>
             {imageSrc && (
                 <div className="media-column">
@@ -92,6 +92,10 @@ export function Article({ data }: Props) {
 
     return (
         <article>
+            <div className="article-header">
+                <h1 className="article-title">{data.title}</h1>
+                <p className="article-date">{new Intl.DateTimeFormat('en-US').format(new Date(data.date))}</p>
+            </div>
             {paragraphStrings?.map((paragraph, index) => {
                 const imageObj = data.images.find(obj => obj.paragraph === index);
                 if(!imageObj) {

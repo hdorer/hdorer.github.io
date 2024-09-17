@@ -5,7 +5,6 @@ import MobileNavbar from '../components/MobileNavbar';
 import PageLayout from '../components/PageLayout';
 import Footer from "../components/Footer";
 import globalContext from '../components/GlobalContext';
-import './page.css';
 
 function Root() {
     const context = useContext(globalContext);
