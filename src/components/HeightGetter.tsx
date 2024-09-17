@@ -12,7 +12,7 @@ function HeightGetter({ elementRef, setHeight }: Props) {
         }
         
         setHeight(elementRef.current.offsetHeight);
-    }, []);
+    }, [elementRef.current?.offsetHeight]);
     
     return <></>;
 }

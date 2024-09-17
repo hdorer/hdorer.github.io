@@ -49,7 +49,9 @@ function Paragraph({ text, imageSrc, imageCaption }: ParagraphProps) {
             <HeightGetter elementRef={textRef} setHeight={recordTextHeight} />
             <HeightGetter elementRef={captionRef} setHeight={recordCaptionHeight} />
             <div className={`${imageCaption ? "text-column" : "text-column no-image"}`}>
-                <Markdown className="article-text">{text}</Markdown>
+                <div ref={textRef} className="text-wrapper">
+                    <Markdown className="article-text">{text}</Markdown>
+                </div>
             </div>
             {imageSrc && (
                 <div className="media-column">
