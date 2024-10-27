@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import Markdown from 'react-markdown';
+import Card from '../components/Card';
 import projectsContent from '../assets/articles/Encounter System Article.md?raw';
+import syncCapsule from '../assets/images/sync-capsule.png';
 import './page.css';
 
 function Projects() {
@@ -20,19 +22,10 @@ function Projects() {
 
     return (
         <>
-            <h1 className="page-title">SYNC's Encounter System</h1>
-            <div className="content-block">
-                <Markdown className="content-text">{projectsContent}</Markdown>
-                <iframe
-                    width={ width >= 768 ? "560" : "256" }
-                    height={ width >= 768 ? "315" : "144" }
-                    src="https://www.youtube.com/embed/gpjXHFgNoHk?si=CgkM1-BCLZ0tpkCu"
-                    title="YouTube video player"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    referrerPolicy="strict-origin-when-cross-origin"
-                    allowFullScreen />
-            </div>
+            <Card title='SYNC' thumbnail={syncCapsule} linkTo="sync">
+                My Champlain College capstone project, SYNC, is a first-person shooter that lets you hack into your enemies and take control of them,
+                using their abilities and weapons for your benefit.  Learn more about SYNC and the work that I did for the project here!
+            </Card>
         </>
     );
 }
