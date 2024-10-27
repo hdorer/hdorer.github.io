@@ -6,6 +6,9 @@ name: Deploy Website
 on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+  push:
+    branches:
+      - public
 
 permissions:
   contents: read
