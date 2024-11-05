@@ -59,7 +59,7 @@ article {
 
 .media-column {
     width: 33%;
-    display:flex; /* surely this will have no negative consequences */
+    display: flex; /* surely this will have no negative consequences */
     flex-direction: column;
 }
 

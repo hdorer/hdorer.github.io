@@ -9,7 +9,7 @@ function Footer() {
     return (
         <footer>
             <div className="footer-container">
-                <a href="https://github.con/hdorer" className="footer-link">
+                <a href="https://github.com/hdorer" className="footer-link">
                     <img src={githubIcon} alt="Look at my repositories on GitHub" />
                 </a>
                 <a href="https://hdorer.itch.io/" className="footer-link">

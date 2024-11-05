@@ -1,6 +1,6 @@
 import { ReactNode, useContext, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import HeightGetter from './HeightGetter';
+import SizeGetter from './SizeGetter';
 import globalContext from './GlobalContext';
 import './Card.css';
 
@@ -19,14 +19,14 @@ function Card({ title, thumbnail, linkTo, children }: Props) {
 
     const bodyDiv = useRef<HTMLDivElement>(null);
 
-    const [bodyDivHeight, recordBodyDivHeight] = useState(0);
+    const [bodyDivSize, recordBodyDivSize] = useState({ width: 0, height: 0 });
     
     const desktopLayout = (
         <div className="card">
-            <HeightGetter elementRef={bodyDiv} setHeight={recordBodyDivHeight} />
+            <SizeGetter elementRef={bodyDiv} setSize={recordBodyDivSize} />
             { thumbnail && (
                 <div className="card-thumbnail">
-                    <img src={thumbnail} style={{ maxHeight: `${bodyDivHeight}px` }} />
+                    <img src={thumbnail} style={{ maxHeight: `${bodyDivSize.height}px` }} />
                 </div>
             )}
             <div ref={bodyDiv} className={thumbnail ? "card-body" : "card-body no-thumbnail"}>

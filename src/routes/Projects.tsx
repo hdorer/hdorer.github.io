@@ -1,25 +1,8 @@
-import { useState, useEffect } from 'react';
-import Markdown from 'react-markdown';
 import Card from '../components/Card';
-import projectsContent from '../assets/articles/Encounter System Article.md?raw';
 import syncCapsule from '../assets/images/sync-capsule.png';
 import './page.css';
 
 function Projects() {
-    const [width, setWidth] = useState(window.innerWidth);
-
-    useEffect(() => {
-        const handleResize = () => {
-            setWidth(window.innerWidth);
-        };
-
-        window.addEventListener('resize', handleResize);
-
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        }
-    }, []);
-
     return (
         <>
             <Card title='SYNC' thumbnail={syncCapsule} linkTo="sync">

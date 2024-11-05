@@ -4,10 +4,18 @@ import Root from "./routes/Root";
 import AboutMe from "./routes/AboutMe";
 import Projects from "./routes/Projects";
 import TestPage from "./routes/TestPage";
-import { Article, ArticleData } from "./components/Article";
+import { Article, ArticleData, MediaType } from "./components/Article";
 import encounterArticleJson from "./assets/articles/data/encounter_system.json";
 
-const encounterArticleData: ArticleData = encounterArticleJson;
+const transformedMedia = encounterArticleJson.media.map((item: any) => ({
+	...item,
+	type: item.type as MediaType
+}));
+
+const encounterArticleData: ArticleData = {
+	...encounterArticleJson,
+	media: transformedMedia
+};
 
 function App() {
     return (

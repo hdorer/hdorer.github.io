@@ -1,11 +1,17 @@
-import { useContext, useRef, useState, useEffect } from 'react';
+import { RefObject, useContext, useRef, useState, useEffect } from 'react';
 import Markdown from 'react-markdown';
-import HeightGetter from './HeightGetter';
+import SizeGetter from './SizeGetter';
 import globalContext from './GlobalContext';
 import articles from '../modules/ArticleLoader';
 import './Article.css';
 
-interface ArticleImage {
+export enum MediaType {
+    image = "IMAGE",
+    video = "VIDEO"
+}
+
+interface ArticleMedia {
+    type: MediaType;
     src: string;
     paragraph: number;
     caption?: string;
@@ -15,20 +21,59 @@ export interface ArticleData {
     filename: string;
     title: string
     date: string;
-    images: ArticleImage[];
+    media: ArticleMedia[];
+}
+
+interface ParagraphIframeProps {
+    src: string;
+    mediaColumn: RefObject<HTMLDivElement>;
 }
 
 interface ParagraphProps {
+    index: number;
     text: string;
-    imageSrc?: string;
-    imageCaption?: string;
+    media?: ArticleMedia;
 }
 
 interface Props {
     data: ArticleData;
 }
 
-function Paragraph({ text, imageSrc, imageCaption }: ParagraphProps) {
+function ParagraphIframe({ src, mediaColumn }: ParagraphIframeProps) {
+    const [mediaColumnSize, recordMediaColumnSize] = useState({ width: 0, height: 0});
+    const [iframeSize, setIframeSize] = useState({ width: 0, height: 0 });
+    
+    useEffect(() => {
+        let iframeWidth = mediaColumnSize.width;
+        let iframeHeight = iframeWidth / 16 * 9;
+        
+        // I might need to reverse the order in which I do this
+        if(iframeHeight > mediaColumnSize.height) {
+            iframeHeight = mediaColumnSize.height;
+            iframeWidth = iframeHeight / 9 * 16;
+        }
+
+        setIframeSize({ width: iframeWidth, height: iframeHeight });
+    }, [mediaColumnSize]);
+
+    return(
+        <>
+            <SizeGetter elementRef={mediaColumn} setSize={recordMediaColumnSize} />
+            <iframe
+                width={iframeSize.width}
+                height={iframeSize.height}
+                src={src}
+                title="YouTube video player"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy='strict-origin-when-cross-origin'
+                allowFullScreen
+            />
+        </>
+    )
+}
+
+function Paragraph({ index, text, media }: ParagraphProps) {
     const imageMinHeight = 240;
 
     const context = useContext(globalContext);
@@ -36,29 +81,45 @@ function Paragraph({ text, imageSrc, imageCaption }: ParagraphProps) {
         throw new Error("Missing context (is the component you're trying to use this in inside a GlobalContextProvider?)");
     }
 
+    const mediaColumnRef = useRef<HTMLDivElement>(null);
     const textRef = useRef<HTMLDivElement>(null);
     const captionRef = useRef<HTMLParagraphElement>(null);
 
-    const [textHeight, recordTextHeight] = useState(0);
-    const [captionHeight, recordCaptionHeight] = useState(0);
+    const [textSize, recordTextSize] = useState({ width: 0, height: 0 });
+    const [captionSize, recordCaptionSize] = useState({ width: 0, height: 0 });
 
     const { screenWidth } = context;
 
+    const mediaColumnContents = () => {
+        if(!media) {
+            return <></>;
+        }
+
+        switch(media?.type) {
+            case "IMAGE":
+                return (
+                    <>
+                        <img src={`/src/assets/images/${media.src}`} style={{ maxHeight: `${screenWidth >= 768 ? Math.max(textSize.height - captionSize.height, imageMinHeight) : imageMinHeight}px`}} />
+                        {media.caption && <p ref={captionRef} className="image-caption">{media.caption}</p>}
+                    </>
+                );
+            case "VIDEO":
+                return <ParagraphIframe src={media.src} mediaColumn={mediaColumnRef} />;
+        }       
+    }
+
     return (
         <div className="paragraph">
-            <HeightGetter elementRef={textRef} setHeight={recordTextHeight} />
-            <HeightGetter elementRef={captionRef} setHeight={recordCaptionHeight} />
-            <div className={`${imageCaption ? "text-column" : "text-column no-image"}`}>
+            <SizeGetter elementRef={textRef} setSize={recordTextSize} />
+            <SizeGetter elementRef={captionRef} setSize={recordCaptionSize} />
+            <div className={`${media ? "text-column" : "text-column no-image"}`}>
                 <div ref={textRef} className="text-wrapper">
                     <Markdown className="article-text">{text}</Markdown>
                 </div>
             </div>
-            {imageSrc && (
-                <div className="media-column">
-                    <img src={`/src/assets/images/${imageSrc}`} style={{ maxHeight: `${screenWidth >= 768 ? Math.max(textHeight - captionHeight, imageMinHeight) : imageMinHeight}px` }} />
-                    {imageCaption && <p ref={captionRef} className="image-caption">{imageCaption}</p>}
-                </div>
-            )}
+            <div ref={mediaColumnRef} className="media-column">
+                {media && mediaColumnContents()}
+            </div>
         </div>
     );
 }
@@ -99,14 +160,11 @@ export function Article({ data }: Props) {
                 <p className="article-date">{new Intl.DateTimeFormat('en-US').format(new Date(data.date))}</p>
             </div>
             {paragraphStrings?.map((paragraph, index) => {
-                const imageObj = data.images.find(obj => obj.paragraph === index);
-                if(!imageObj) {
-                    console.log(`No image object found for paragraph ${index}!`)
-                    return <Paragraph key={index} text={paragraph} />;
+                const mediaObj = data.media.find(obj => obj.paragraph === index);
+                if(mediaObj) {
+                    return <Paragraph key={index} index={index} text={paragraph} media={mediaObj} />;
                 }
-                
-                console.log(imageObj);
-                return <Paragraph key={index} text={paragraph} imageSrc={imageObj.src} imageCaption={imageObj.caption} />;
+                return <Paragraph key={index} index={index} text={paragraph} />;
             })}
         </article>
     );
