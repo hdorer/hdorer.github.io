@@ -63,6 +63,10 @@ article {
     flex-direction: column;
 }
 
+.media-column.no-text {
+    width: 100%;
+}
+
 .media-column img {
     height: auto;
     max-width: 100%;

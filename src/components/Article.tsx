@@ -27,10 +27,10 @@ export interface ArticleData {
 interface ParagraphIframeProps {
     src: string;
     mediaColumn: RefObject<HTMLDivElement>;
+    mediaOnly: boolean;
 }
 
 interface ParagraphProps {
-    index: number;
     text: string;
     media?: ArticleMedia;
 }
@@ -39,16 +39,22 @@ interface Props {
     data: ArticleData;
 }
 
-function ParagraphIframe({ src, mediaColumn }: ParagraphIframeProps) {
+function ParagraphIframe({ src, mediaColumn, mediaOnly }: ParagraphIframeProps) {
+    const maxWidth = 1280;
+
     const [mediaColumnSize, recordMediaColumnSize] = useState({ width: 0, height: 0});
     const [iframeSize, setIframeSize] = useState({ width: 0, height: 0 });
     
     useEffect(() => {
+        console.log("mediaColumnSize.width: " + mediaColumnSize.width);
         let iframeWidth = mediaColumnSize.width;
+        if(iframeWidth > maxWidth) {
+            iframeWidth = maxWidth;
+        }
+
         let iframeHeight = iframeWidth / 16 * 9;
         
-        // I might need to reverse the order in which I do this
-        if(iframeHeight > mediaColumnSize.height) {
+        if(!mediaOnly && iframeHeight > mediaColumnSize.height) {
             iframeHeight = mediaColumnSize.height;
             iframeWidth = iframeHeight / 9 * 16;
         }
@@ -73,8 +79,9 @@ function ParagraphIframe({ src, mediaColumn }: ParagraphIframeProps) {
     )
 }
 
-function Paragraph({ index, text, media }: ParagraphProps) {
+function Paragraph({ text, media }: ParagraphProps) {
     const imageMinHeight = 240;
+    const mediaOnlyFlag = "$MEDIA_ONLY$";
 
     const context = useContext(globalContext);
     if(!context) {
@@ -104,7 +111,7 @@ function Paragraph({ index, text, media }: ParagraphProps) {
                     </>
                 );
             case "VIDEO":
-                return <ParagraphIframe src={media.src} mediaColumn={mediaColumnRef} />;
+                return <ParagraphIframe src={media.src} mediaColumn={mediaColumnRef} mediaOnly={text === mediaOnlyFlag} />;
         }       
     }
 
@@ -112,12 +119,14 @@ function Paragraph({ index, text, media }: ParagraphProps) {
         <div className="paragraph">
             <SizeGetter elementRef={textRef} setSize={recordTextSize} />
             <SizeGetter elementRef={captionRef} setSize={recordCaptionSize} />
-            <div className={`${media ? "text-column" : "text-column no-image"}`}>
-                <div ref={textRef} className="text-wrapper">
-                    <Markdown className="article-text">{text}</Markdown>
+            {text !== mediaOnlyFlag && (
+                <div className={`${media ? "text-column" : "text-column no-image"}`}>
+                    <div ref={textRef} className="text-wrapper">
+                        <Markdown className="article-text">{text}</Markdown>
+                    </div>
                 </div>
-            </div>
-            <div ref={mediaColumnRef} className="media-column">
+            )}
+            <div ref={mediaColumnRef} className={text === mediaOnlyFlag ? "media-column no-text" : "media-column"}>
                 {media && mediaColumnContents()}
             </div>
         </div>
@@ -162,9 +171,9 @@ export function Article({ data }: Props) {
             {paragraphStrings?.map((paragraph, index) => {
                 const mediaObj = data.media.find(obj => obj.paragraph === index);
                 if(mediaObj) {
-                    return <Paragraph key={index} index={index} text={paragraph} media={mediaObj} />;
+                    return <Paragraph key={index} text={paragraph} media={mediaObj} />;
                 }
-                return <Paragraph key={index} index={index} text={paragraph} />;
+                return <Paragraph key={index} text={paragraph} />;
             })}
         </article>
     );
