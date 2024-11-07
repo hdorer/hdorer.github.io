@@ -5,15 +5,15 @@ import AboutMe from "./routes/AboutMe";
 import Projects from "./routes/Projects";
 import TestPage from "./routes/TestPage";
 import { Article, ArticleData, MediaType } from "./components/Article";
-import encounterArticleJson from "./assets/articles/data/encounter_system.json";
+import syncShowcaseJson from "./assets/articles/data/sync_showcase.json";
 
-const transformedMedia = encounterArticleJson.media.map((item: any) => ({
+const transformedMedia = syncShowcaseJson.media.map((item: any) => ({
 	...item,
 	type: item.type as MediaType
 }));
 
-const encounterArticleData: ArticleData = {
-	...encounterArticleJson,
+const syncShowcaseData: ArticleData = {
+	...syncShowcaseJson,
 	media: transformedMedia
 };
 
@@ -26,7 +26,7 @@ function App() {
 						<Route index element={<AboutMe />} />
 						<Route path="projects/">
 							<Route index element={<Projects />} />
-							<Route path="sync" element={<Article data={encounterArticleData} />} />
+							<Route path="sync" element={<Article data={syncShowcaseData} />} />
 						</Route>
 						{import.meta.env.DEV && <Route path="test-page/" element={<TestPage />} />}
 					</Route>
