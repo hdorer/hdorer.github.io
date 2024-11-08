@@ -4,18 +4,10 @@ import Root from "./routes/Root";
 import AboutMe from "./routes/AboutMe";
 import Projects from "./routes/Projects";
 import TestPage from "./routes/TestPage";
-import { Article, ArticleData, MediaType } from "./components/Article";
+import { Article, ArticleData } from "./components/Article";
 import syncShowcaseJson from "./assets/articles/data/sync_showcase.json";
 
-const transformedMedia = syncShowcaseJson.media.map((item: any) => ({
-	...item,
-	type: item.type as MediaType
-}));
-
-const syncShowcaseData: ArticleData = {
-	...syncShowcaseJson,
-	media: transformedMedia
-};
+const syncShowcaseData = syncShowcaseJson as ArticleData;
 
 function App() {
     return (

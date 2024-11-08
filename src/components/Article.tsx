@@ -5,13 +5,8 @@ import globalContext from './GlobalContext';
 import articles from '../modules/ArticleLoader';
 import './Article.css';
 
-export enum MediaType {
-    image = "IMAGE",
-    video = "VIDEO"
-}
-
 interface ArticleMedia {
-    type: MediaType;
+    type: string;
     src: string;
     paragraph: number;
     caption?: string;
