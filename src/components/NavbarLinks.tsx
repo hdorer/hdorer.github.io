@@ -9,13 +9,18 @@ interface Props {
 function NavbarLinks({ onClick }: Props) {
     const { pathname } = useLocation();
 
-    return (
-        <>
-            {import.meta.env.DEV && <Link to="/test-page/" className={pathname==="/test-page/" ? "active" : ""} onClick={onClick}>Test Page</Link>}
-            <Link to="/" className={pathname === "/" ? "active" : ""} onClick={onClick}>About Me</Link>
-            <Link to="/projects/" className={pathname === "/projects/" ? "active" : ""} onClick={onClick}>Projects</Link>
-        </>
-    )
+    // Temporary until About Me page is finished
+    if(import.meta.env.DEV) {
+        return (
+            <>
+                <Link to="/test-page/" className={pathname==="/test-page/" ? "active" : ""} onClick={onClick}>Test Page</Link>
+                <Link to="/" className={pathname === "/" ? "active" : ""} onClick={onClick}>About Me</Link>
+                <Link to="/projects/" className={pathname === "/projects/" ? "active" : ""} onClick={onClick}>Projects</Link>
+            </>
+        );
+    } else {
+        return <Link to="/" className={pathname === "/" ? "active" : ""} onClick={onClick}>Projects</Link>;
+    }
 }
 
 export default NavbarLinks;

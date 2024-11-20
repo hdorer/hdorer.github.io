@@ -10,22 +10,38 @@ import syncShowcaseJson from "./assets/articles/data/sync_showcase.json";
 const syncShowcaseData = syncShowcaseJson as ArticleData;
 
 function App() {
-    return (
-		<GlobalContextProvider>
-			<BrowserRouter>
-				<Routes>
-					<Route path="/" element={<Root />}>
-						<Route index element={<AboutMe />} />
-						<Route path="projects/">
+	// Temporary until About Me page is finished
+	if(import.meta.env.DEV) {
+		return (
+			<GlobalContextProvider>
+				<BrowserRouter>
+					<Routes>
+						<Route path="/" element={<Root />}>
+							<Route index element={<AboutMe />} />
+							<Route path="projects/">
+								<Route index element={<Projects />} />
+								<Route path="sync" element={<Article data={syncShowcaseData} />} />
+							</Route>
+							<Route path="test-page/" element={<TestPage />} />
+						</Route>
+					</Routes>
+				</BrowserRouter>
+			</GlobalContextProvider>
+		);
+	} else {
+		return (
+			<GlobalContextProvider>
+				<BrowserRouter>
+					<Routes>
+						<Route path="/" element={<Root />}>
 							<Route index element={<Projects />} />
 							<Route path="sync" element={<Article data={syncShowcaseData} />} />
 						</Route>
-						{import.meta.env.DEV && <Route path="test-page/" element={<TestPage />} />}
-					</Route>
-				</Routes>
-			</BrowserRouter>
-		</GlobalContextProvider>
-	);
+					</Routes>
+				</BrowserRouter>
+			</GlobalContextProvider>
+		);
+	}
 }
 
 export default App;
