@@ -35,13 +35,12 @@ interface Props {
 }
 
 function ParagraphIframe({ src, mediaColumn, mediaOnly }: ParagraphIframeProps) {
-    const maxWidth = 1280;
+    const maxWidth = 854;
 
     const [mediaColumnSize, recordMediaColumnSize] = useState({ width: 0, height: 0});
     const [iframeSize, setIframeSize] = useState({ width: 0, height: 0 });
     
     useEffect(() => {
-        console.log("mediaColumnSize.width: " + mediaColumnSize.width);
         let iframeWidth = mediaColumnSize.width;
         if(iframeWidth > maxWidth) {
             iframeWidth = maxWidth;
@@ -71,7 +70,7 @@ function ParagraphIframe({ src, mediaColumn, mediaOnly }: ParagraphIframeProps) 
                 allowFullScreen
             />
         </>
-    )
+    );
 }
 
 function Paragraph({ text, media }: ParagraphProps) {
