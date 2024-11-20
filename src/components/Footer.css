@@ -1,0 +1,25 @@
+/* Footer */
+footer{
+	position: fixed;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: #225461;
+	height: 50px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.footer-container {
+	display: flex;
+}
+
+.footer-link {
+	margin: 0 10px;
+}
+
+.footer-link img {
+	width: 25px;
+	height: 25px;
+}

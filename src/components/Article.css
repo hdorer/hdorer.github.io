@@ -1,0 +1,106 @@
+article {
+    font-family: "RobotoLight", sans-serif;
+}
+
+.article-header {
+    margin-bottom: 40px;
+}
+
+.article-title {
+    font-size: 48pt;
+    margin: 0;
+}
+
+.article-date {
+    font-size: 16px;
+    font-style: italic;
+    color:rgb(124, 124, 124);
+}
+
+.paragraph {
+    display: flex;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.text-column {
+    width: 67%;
+}
+
+.text-column.no-image {
+    width: 100%;
+}
+
+.text-wrapper {
+    flex-grow: 0;
+    align-self: flex-start;
+    height: auto;
+}
+
+.article-text {
+    font-size: 16pt;
+}
+
+.article-text > * {
+    margin: 0;
+}
+
+.article-text h1 {
+    font-size: 36pt;
+}
+
+.article-text h2 {
+    font-size: 30pt;
+}
+
+.article-text h3 {
+    font-size: 24pt;
+}
+
+.media-column {
+    width: 33%;
+    display: flex; /* surely this will have no negative consequences */
+    flex-direction: column;
+}
+
+.media-column.no-text {
+    width: 100%;
+}
+
+.media-column img {
+    height: auto;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+.image-caption {
+    font-size: 12pt;
+    color: rgb(124, 124, 124);
+    font-style: italic;
+    margin: 0;
+    padding-top: 1em;
+}
+
+@media screen and (min-width: 768px) {
+    .text-column {
+        padding-right: 4%;
+    }
+
+    .text-column.no-image {
+        padding-right: 0;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .paragraph {
+        flex-direction: column;
+    }
+
+    .text-column {
+        width: 100%;
+    }
+
+    .media-column {
+        width: 100%;
+    }
+}
