@@ -25,12 +25,18 @@ interface ParagraphIframeProps {
     mediaOnly: boolean;
 }
 
+interface MediaColumnProps {
+    media: ArticleMedia;
+    mediaColumn: RefObject<HTMLDivElement>;
+    mediaOnly: boolean;
+}
+
 interface ParagraphProps {
     text: string;
     media?: ArticleMedia;
 }
 
-interface Props {
+interface ArticleProps {
     data: ArticleData;
 }
 
@@ -91,7 +97,7 @@ function Paragraph({ text, media }: ParagraphProps) {
 
     const { screenWidth } = context;
 
-    const mediaColumnContents = () => {
+    const MediaColumnContents = (): JSX.Element => {
         if(!media) {
             return <></>;
         }
@@ -106,7 +112,9 @@ function Paragraph({ text, media }: ParagraphProps) {
                 );
             case "VIDEO":
                 return <ParagraphIframe src={media.src} mediaColumn={mediaColumnRef} mediaOnly={text === mediaOnlyFlag} />;
-        }       
+            default:
+                return <p className="article-text">Invalid media type provided!</p>;
+        }
     }
 
     return (
@@ -114,20 +122,22 @@ function Paragraph({ text, media }: ParagraphProps) {
             <SizeGetter elementRef={textRef} setSize={recordTextSize} />
             <SizeGetter elementRef={captionRef} setSize={recordCaptionSize} />
             {text !== mediaOnlyFlag && (
-                <div className={`${media ? "text-column" : "text-column no-image"}`}>
+                <div className={`${media ? "text-column" : "text-column no-media"}`}>
                     <div ref={textRef} className="text-wrapper">
                         <Markdown className="article-text">{text}</Markdown>
                     </div>
                 </div>
             )}
-            <div ref={mediaColumnRef} className={text === mediaOnlyFlag ? "media-column no-text" : "media-column"}>
-                {media && mediaColumnContents()}
-            </div>
+            {media && (
+                <div ref={mediaColumnRef} className={text === mediaOnlyFlag ? "media-column no-text" : "media-column"}>
+                    <MediaColumnContents />
+                </div>
+            )}
         </div>
     );
 }
 
-export function Article({ data }: Props) {
+export function Article({ data }: ArticleProps) {
     const [paragraphStrings, setParagraphStrings] = useState<string[]>();
     const [success, setSuccess] = useState<boolean>(true);
 
